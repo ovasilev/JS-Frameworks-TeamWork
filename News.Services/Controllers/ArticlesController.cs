@@ -85,6 +85,7 @@ namespace News.Services.Controllers
                      }
 
                      article.ReadCount++;
+                     context.Articles.Attach(article);
                      context.SaveChanges();
 
                      var model = new ArticleFullModel()

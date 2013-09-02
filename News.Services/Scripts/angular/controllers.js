@@ -12,11 +12,17 @@ var angularController = (function () {
             $scope.pageSizes = [5, 10, 20, 50];
             console.log(window.location.href);
 
+            $http.get(root + 'categories').success(function (cats) {
+                $scope.categoryFilterData = cats;
+            });
+
             $http.get(root + 'articles').success(function (s) {
+                //s = s.sort(function (x, y) {
+                //    return x['datePublished'].localeCompare(y['datePublished']) * -1;
+                //});
+
                 $scope.pageManager.loadData(s);
-                $http.get(root + 'categories').success(function (cats) {
-                    $scope.categoryFilterData = cats;
-                });
+               
                 if (s.length > 0) {
                     $scope.orderByData = [
                         { display: 'Title', prop: 'title' },
@@ -46,6 +52,7 @@ var angularController = (function () {
 
                     if ($scope.orderByFilter) {
                         console.log($scope.orderByFilter);
+
                         var filter = $scope.orderByFilter;
                         if (parseInt(_.first(data)[filter]) && !Date.parse(_.first(data)[filter])) {
                             if ($scope.orderByOption == 'desc') {
@@ -68,6 +75,12 @@ var angularController = (function () {
                         $scope.pageManager.count = parseInt($scope.pageSize);
                     }
 
+                    $scope.pageSize = null;
+                    $scope.orderByFilter = null;
+                    $scope.query = null;
+                    $scope.categoryFilter = null;
+                    $scope.orderByOption = null;
+
                     $scope.pageManager.loadData(data);
                 });
             }
@@ -86,7 +99,6 @@ var angularController = (function () {
         }
 
         function articleEdit($scope, $http, $routeParams) {
-            $scope.allArticles;
             $scope.article;
             $scope.textVal;
             $scope.selectedComment;
@@ -94,16 +106,17 @@ var angularController = (function () {
             $scope.articleCategory;
             $scope.tagsValue;
 
-            $http({
-                method: 'GET', url: root + 'article/' + $routeParams.articleId,
-            }).success(function (data) {
-                //$scope.allArticles = data;
-                //$scope.article = _.find(data, function (a) { return a.id == $routeParams.articleId });
-                //$scope.textVal = $scope.article.content;
-                //$scope.articleCategory = $scope.article.category;
-                //$scope.articleCategories = _.uniq(_.pluck(data, 'category'));
-                //$scope.tagsValue = $scope.article.tags.join();
+            $http.get(root + 'categories').success(function (cats) {
+                $scope.articleCategories = cats;
+            });
 
+            $http({
+                method: 'GET', url: root+ 'articles/' + $routeParams.articleId,
+            }).success(function (data) {
+                $scope.article = data;
+                $scope.textVal = $scope.article.content;
+                $scope.articleCategory = $scope.article.category.name;
+                $scope.tagsValue = $scope.article.tags.join();
             });
 
             $scope.commentEditor = function (id) {
@@ -177,7 +190,10 @@ var angularController = (function () {
         $scope.pageSizes = [5, 10, 20, 50];
         $scope.userRoles = ['Admin', 'User'];
 
-        $http.get('scripts/appData/users.json').success(function (data) {
+        $http({
+            method: 'GET', url: root + 'users',
+            headers: { 'X-sessionKey': '2gFkjkyZXZSgKzquoKJYCEegyqQdfmQICmiMzMMBJvfyLysrYj' }
+        }).success(function (data) {
             $scope.data = data;
             $scope.pageManager.loadData(data);
             $scope.pageManager.load();
@@ -192,7 +208,10 @@ var angularController = (function () {
         };
 
         $scope.filterUsers = function () {
-            $http.get('scripts/appData/users.json').success(function (s) {
+            $http({
+                method: 'GET', url: root + 'users',
+                headers: { 'X-sessionKey': '2gFkjkyZXZSgKzquoKJYCEegyqQdfmQICmiMzMMBJvfyLysrYj' }
+            }).success(function (s) {
                 var data = s;
 
                 if ($scope.query) {
@@ -256,13 +275,9 @@ var angularController = (function () {
         });
 
         $scope.addCategory = function () {
-            //$http({
-            //    method: 'POST', url: root + 'users/register',
-            //    data: { username: 'batman', authCode: 'd033e22ae348aeb5660fc2140aec35850c4da997', displayname: 'batman' }
-            //   });
             $http({
                 method: 'POST', url: root + 'categories',
-                headers: { 'X-sessionKey': '4WaXXsOuqkEaYScsxtJGGIyIltliPuXhipsKSuhoBETKCdlZmO' }, data: $scope.newCategory
+                headers: { 'X-sessionKey': '2gFkjkyZXZSgKzquoKJYCEegyqQdfmQICmiMzMMBJvfyLysrYj' }, data: $scope.newCategory
             }).success(function (s) {
                 $scope.articleCategories.push(s);
                 $scope.newCategory = '';
@@ -291,9 +306,9 @@ var angularController = (function () {
             console.log($scope.article);
             $http({
                 method: 'POST', url: root + 'articles',
-                headers: { 'X-sessionKey': '4WaXXsOuqkEaYScsxtJGGIyIltliPuXhipsKSuhoBETKCdlZmO' }, data: $scope.article
+                headers: { 'X-sessionKey': '2gFkjkyZXZSgKzquoKJYCEegyqQdfmQICmiMzMMBJvfyLysrYj' }, data: $scope.article
             }).success(function (s) {
-                console.log(s);
+                window.location = window.location.href.replace(/#.*$/, '#/admin/articles');
             });
         }
 

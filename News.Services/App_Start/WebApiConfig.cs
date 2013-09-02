@@ -20,7 +20,7 @@ namespace News.Services
             );
 
             config.Routes.MapHttpRoute(
-                name: "TagsApi",
+                name: "CategoriesApi",
                 routeTemplate: "api/categories/{categoryId}/articles",
                 defaults: new
                 {
@@ -38,8 +38,9 @@ namespace News.Services
                     controller = "articles",
                     action = "comment"
                 }
-            );
 
+            );
+             
             config.Routes.MapHttpRoute(
                 name: "UsersApi",
                 routeTemplate: "api/users/{action}",

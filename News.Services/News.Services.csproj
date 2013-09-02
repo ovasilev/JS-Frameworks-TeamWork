@@ -185,6 +185,8 @@
   <ItemGroup>
     <Content Include="adminIndex.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="articles.js" />
+    <Content Include="categories.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -239,6 +241,10 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="css\global.css" />
+    <Content Include="css\kendo.bootstrap.css" />
+    <Content Include="css\kendo.common.css" />
+    <Content Include="css\onepcssgrid.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -252,6 +258,27 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="images\article-thumb.png" />
+    <Content Include="images\news-logo.jpg" />
+    <Content Include="index.html" />
+    <Content Include="js\app.js" />
+    <Content Include="js\app\data.js" />
+    <Content Include="js\app\ui-controller.js" />
+    <Content Include="js\app\view-models.js" />
+    <Content Include="js\app\views.js" />
+    <Content Include="js\libs\class.js" />
+    <Content Include="js\libs\http-requester.js" />
+    <None Include="js\libs\jquery-2.0.3.intellisense.js" />
+    <Content Include="js\libs\jquery-2.0.3.js" />
+    <Content Include="js\libs\jquery-2.0.3.min.js" />
+    <Content Include="js\libs\jquery.paginate.js" />
+    <None Include="js\libs\kendo.web.min.intellisense.js" />
+    <Content Include="js\libs\kendo.web.min.js" />
+    <Content Include="js\libs\rsvp.min.js" />
+    <Content Include="js\libs\sha1.js" />
+    <Content Include="js\libs\_references.js" />
+    <Content Include="js\partials\loginForm.html" />
+    <Content Include="menu.js" />
     <Content Include="Scripts\angular\controllers.js" />
     <Content Include="Scripts\angular\pageManager.js" />
     <Content Include="Scripts\angular\partials\adminArticleEdit.html" />
@@ -552,6 +579,7 @@
     <Content Include="Scripts\libs\jquery-2.0.3.js" />
     <Content Include="Scripts\libs\underscore.js" />
     <Content Include="Styles\adminStyles.css" />
+    <Content Include="tags.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -563,19 +591,19 @@
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\accent.png" />
-    <Content Include="Images\bullet.png" />
-    <Content Include="Images\heroAccent.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
+    <Content Include="images\accent.png" />
+    <Content Include="images\bullet.png" />
+    <Content Include="images\heroAccent.png" />
+    <Content Include="images\orderedList0.png" />
+    <Content Include="images\orderedList1.png" />
+    <Content Include="images\orderedList2.png" />
+    <Content Include="images\orderedList3.png" />
+    <Content Include="images\orderedList4.png" />
+    <Content Include="images\orderedList5.png" />
+    <Content Include="images\orderedList6.png" />
+    <Content Include="images\orderedList7.png" />
+    <Content Include="images\orderedList8.png" />
+    <Content Include="images\orderedList9.png" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -602,6 +630,9 @@
     <Content Include="Scripts\appData\articles.json" />
     <Content Include="Scripts\appData\test.json" />
     <Content Include="Scripts\appData\users.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="js\libs\jquery-2.0.3.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
