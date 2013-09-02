@@ -103,7 +103,6 @@ var angularController = (function () {
             $scope.textVal;
             $scope.selectedComment;
             $scope.editedCommentContent;
-            $scope.articleCategory;
             $scope.tagsValue;
 
             $http.get(root + 'categories').success(function (cats) {
@@ -115,7 +114,7 @@ var angularController = (function () {
             }).success(function (data) {
                 $scope.article = data;
                 $scope.textVal = $scope.article.content;
-                $scope.articleCategory = $scope.article.category.name;
+                $scope.articleCategory = $scope.article.category;
                 $scope.tagsValue = $scope.article.tags.join();
             });
 
@@ -170,9 +169,18 @@ var angularController = (function () {
                 $scope.article.category = $scope.articleCategory;
                 $scope.article.content = $scope.textVal;
                 console.log($scope.article);
+                $http({
+                    method: 'PUT', url: root + 'articles',
+                    headers: { 'X-sessionKey': '2gFkjkyZXZSgKzquoKJYCEegyqQdfmQICmiMzMMBJvfyLysrYj' }, data: $scope.article
+                }).success(function (data) {
+                    console.log('Updated')
+                });
+                //window.location.reload();
+
             }
 
             $scope.cancelChanges = function () {
+               
                 window.location.reload();
             }
         }
