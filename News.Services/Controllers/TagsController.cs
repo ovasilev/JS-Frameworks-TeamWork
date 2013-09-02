@@ -23,13 +23,11 @@ namespace News.Services.Controllers
         }
 
         [HttpGet]
-        public IQueryable<TagModel> GetAll([ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
+        public IQueryable<TagModel> GetAll()
         {
             var responseMsg = this.PerformOperationAndHandleExceptions(
                 () =>
                 {
-                    this.ValidateSessionKey(sessionKey);
-
                     var context = this.contextFactory.Create() as NewsContext;
                     var tags = context.Tags.OrderBy(t => t.Name);
 
