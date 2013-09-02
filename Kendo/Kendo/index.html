@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>News</title>
+    <script src="js/libs/jquery-2.0.3.js"></script>
+    <script src="js/libs/jquery.paginate.js"></script>
+    <script src="js/libs/sha1.js"></script>
+    <script src="js/libs/kendo.web.min.js"></script>
+    <script src="js/libs/rsvp.min.js"></script>
+    <script src="js/libs/class.js"></script>
+    <script src="js/libs/http-requester.js"></script>
+    <script src="js/app/data.js"></script>
+    <script src="js/app/view-models.js"></script>
+    <script src="js/app/views.js"></script>
+    <script src="js/app/ui-controller.js"></script>
+    <script src="js/app.js"></script>
+    <link href="css/onepcssgrid.css" rel="stylesheet" />
+    <link href="css/kendo.common.css" rel="stylesheet" />
+    <link href="css/kendo.bootstrap.css" rel="stylesheet" />
+    <link href="css/global.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="onepcssgrid-1000">
+        <div class="onerow">
+            <div id="header" class="col12 last">
+                <div id="logo">
+                    <img src="images/news-logo.jpg" width="485" height="135" />
+                </div>
+            </div>
+        </div>
+        <div class="onerow">
+            <div id="content" class="col9"></div>
+            <div id="sidebar" class="col3 last">
+                <div id="categories-container">
+                    <h3 class="k-header">Categories</h3>
+                </div>
+                <div id="tags-container">
+                    <h3 class="k-header">Tags</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="onerow">
+            <div id="footer" class="col12 last">
+                <p>Copyrights...</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/x-kendo-template" id="articles-template">
+            <ul data-template="article-item" data-bind="source: articles"></ul>
+    </script>
+    <script type="text/x-kendo-template" id="article-item">
+            <li>
+                <h2 data-bind="text: title" class="article-title"></h2>
+                <div class="article-info">
+                    <span data-bind="text: postDate" ></span> |
+                    Comments: <span data-bind="text: comments" ></span> |
+                    Read: <span data-bind="text: read" ></span>
+                </div>
+                <div class="article-preview">
+                    <img src="images/article-thumb.png">
+                    <p data-bind="text: content" class="article-content"></p>
+                </div>
+            </li>
+    </script>
+
+    <script type="text/x-kendo-template" id="navigation-template">
+            <ul data-template="navigation-item" data-bind="source: navigationItems"></ul>
+    </script>
+    <script type="text/x-kendo-template" id="navigation-item">
+            <li>
+                <a data-bind="attr: { href: url }">
+                    <span data-bind="text: title"></span>
+                </a>
+            </li>
+    </script>
+
+    <script type="text/x-kendo-template" id="categories-template">
+            <ul data-template="category-item" data-bind="source: categories"></ul>
+    </script>
+    <script type="text/x-kendo-template" id="category-item">
+            <li>
+                <a data-bind="attr: { href: url }">
+                    <span data-bind="text: name"></span>
+                </a>
+            </li>
+    </script>
+
+    <script type="text/x-kendo-template" id="tags-template">
+            <ul data-template="tag-item" data-bind="source: tags"></ul>
+    </script>
+    <script type="text/x-kendo-template" id="tag-item">
+            <li>
+                <a data-bind="attr: { href: url }">
+                    <span data-bind="text: name"></span>
+                </a>
+            </li>
+    </script>
+
+    <script type="text/x-kendo-template" id="loginform-template">
+    <div id="tabs">
+        <ul>
+            <li class="k-state-active">Login
+            </li>
+            <li>Register
+            </li>
+        </ul>
+        <div class="enterPage">
+            <label for="tb-username">Username</label>
+            <input data-bind="value: username" type="text" class="tb-username" />
+            <br />
+            <label for="tb-password">Password</label>
+            <input data-bind="value: password" type="password" class="tb-password" />
+            <br />
+            <button data-bind="click: login">Login</button>
+        </div>
+        <div class="enterPage">
+            <label for="tb-username">Username</label>
+            <input data-bind="value: username" type="text" class="tb-username" />
+            <br />
+            <label for="tb-displayName">DisplayName</label>
+            <input data-bind="value: displayName" type="text" class="tb-displayName" />
+            <br />
+            <label for="tb-password">Password</label>
+            <input data-bind="value: password" type="password" class="tb-password" />
+            <br />
+            <button data-bind="click: register">Register</button>
+        </div>
+    </div>
+    </script>
+</body>
+</html>
