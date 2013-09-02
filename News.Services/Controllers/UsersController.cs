@@ -38,6 +38,29 @@ namespace News.Services.Controllers
         {
         }
 
+        [HttpGet]
+        public IQueryable<UserModel> GetAll()
+        {
+            var responseMsg = this.PerformOperationAndHandleExceptions(
+                () =>
+                {
+                    var context = this.contextFactory.Create() as NewsContext;
+
+                    var result = from user in context.Users
+                                 select new UserModel()
+                                 {
+                                     Id = user.Id,
+                                     Username = user.Username,
+                                     Displayname = user.DisplayName,
+                                     IsAdmin = user.IsAdmin,
+                                 };
+
+                    return result.OrderBy(usr => usr.Username);
+                });
+
+            return responseMsg;
+        }
+
         [HttpPost]
         [ActionName("register")]
         public HttpResponseMessage PostRegisterUser(UserModel model)
@@ -158,6 +181,49 @@ namespace News.Services.Controllers
                          var responce = this.Request.CreateResponse(HttpStatusCode.OK);
 
                          return responce;
+                     }
+                 });
+
+            return responseMsg;
+        }
+
+        [HttpPut]
+        public HttpResponseMessage PutUser(UserModel model,
+            [ValueProvider(typeof(HeaderValueProviderFactory<string>))] string sessionKey)
+        {
+            var responseMsg = this.PerformOperationAndHandleExceptions(
+                 () =>
+                 {
+                     var context = this.contextFactory.Create() as NewsContext;
+
+                     using (context)
+                     {
+                         this.ValidateSessionKey(sessionKey);
+                         this.ValidateUserName(model.Username);
+                         this.ValidateAuthCode(model.AuthCode);
+
+                         var user = context.Users.FirstOrDefault(usr => usr.Id == model.Id);
+                         if (user == null)
+                         {
+                             throw new InvalidOperationException("User doesn't exist");
+                         }
+
+                         user.Username = model.Username;
+                         user.AuthCode = model.AuthCode;
+                         user.IsAdmin = model.IsAdmin;
+
+                         context.SaveChanges();
+
+                         UserModel createdModel = new UserModel()
+                         {
+                             Id = user.Id,
+                             Username = user.Username,
+                             Displayname = user.DisplayName,
+                             IsAdmin = user.IsAdmin,
+                         };
+
+                         var response = this.Request.CreateResponse(HttpStatusCode.OK, createdModel);
+                         return response;
                      }
                  });
 

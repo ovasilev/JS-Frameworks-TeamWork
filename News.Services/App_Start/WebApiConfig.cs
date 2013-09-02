@@ -20,6 +20,17 @@ namespace News.Services
             );
 
             config.Routes.MapHttpRoute(
+                name: "TagsApi",
+                routeTemplate: "api/categories/{categoryId}/articles",
+                defaults: new
+                {
+                    controller = "categories",
+                    action = "articles"
+                }
+            );
+
+
+            config.Routes.MapHttpRoute(
                 name: "ArticlesApi",
                 routeTemplate: "api/articles/{articleId}/comment",
                 defaults: new

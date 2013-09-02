@@ -7,6 +7,9 @@ namespace News.Services.Models
     [DataContract()]
     public class UserModel
     {
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
+
         [DataMember(Name = "username")]
         public string Username { get; set; }
 

@@ -371,7 +371,7 @@ namespace News.Services.Controllers
                              ReadCount = article.ReadCount,
                          };
 
-                         var response = this.Request.CreateResponse(HttpStatusCode.Created, createdModel);
+                         var response = this.Request.CreateResponse(HttpStatusCode.OK, createdModel);
                          return response;
                      }
                  });
