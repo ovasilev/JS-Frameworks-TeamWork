@@ -10,5 +10,8 @@ namespace News.Services.Models
 
         [DataMember(Name = "sessionKey")]
         public string SessionKey { get; set; }
+
+        [DataMember(Name = "isAdmin")]
+        public bool IsAdmin { get; set; }
     }
 }

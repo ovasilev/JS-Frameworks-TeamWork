@@ -1,0 +1,40 @@
+﻿<table id="article-editor">
+    <tfoot>
+        <tr>
+            <td colspan="2">
+               <button ng-click="saveChanges()">Save Changes</button>
+               <button ng-click="cancelChanges()">Cancel</button>
+            </td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <tr>
+            <td>Category</td>
+            <td>
+                <select ng-model="articleCategory" ng-options="cat.name for cat in articleCategories">
+                </select>
+                <input ng-model="newCategory.name"/><button ng-click="addCategory()">Add Category</button>
+            </td>
+        </tr>
+         <tr>
+            <td>Title</td>
+            <td><input ng-model="titleValue" placeholder="Title"/></td>
+        </tr>
+        <tr>
+            <td>Tags</td>
+            <td>
+                <div>
+                    <span ng-repeat="tag in article.tags">{{tag}}
+                        <button class="smallBtn" ng-click="removeTag(tag)">D</button>
+                    </span>
+                </div>
+                <input ng-model="newTag"/>
+                <button ng-click="addTag()">Add Tag</button>
+            </td>
+        </tr>
+         <tr>
+            <td>Content</td>
+            <td><textarea ng-model="textVal"></textarea></td>
+        </tr>
+    </tbody>
+</table>

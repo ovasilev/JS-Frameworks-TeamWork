@@ -1,0 +1,80 @@
+﻿<h1>Users</h1>
+<fieldset id="search-field">
+    <legend>User Search</legend>
+    <ul>
+        <li>
+            <input ng-model="query" placeholder="Search"/>
+        </li>
+        <li>Filter: 
+            <select ng-model="userFilter">
+                <option value="admin">Admins</option>
+                <option value="logged">Logged</option>
+            </select>
+        </li>
+        <li>
+            Order By :
+            <select ng-model="orderByFilter">
+                <option ng-repeat="prop in orderByData" value="{{prop}}">{{prop}}</option>
+            </select>
+        </li>
+            <li>
+                Sort Order :
+                <select ng-model="orderByOption">
+                <option value="asc">Ascendence</option>
+                <option value="desc">Descendence</option>
+            </select>
+            </li>
+        <li>
+                Items Per Page :
+                <select ng-model="pageSize">
+                <option ng-repeat="size in pageSizes" value="{{size}}">{{size}}</option>
+            </select>
+        </li>
+    </ul>
+    <button id="search-btn" ng-click="filterUsers()">Search</button>
+</fieldset>
+<hr />
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Display Name</th>
+            <th>Auth Code</th>
+            <th>Session Key</th>
+            <th>Role</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="u in pageManager.pageData">
+            <td>{{u.id}}</td>
+            <td>{{u.userName}}</td>
+            <td>{{u.displayName}}</td>
+            <td>{{u.authCode}}</td>
+            <td>{{u.sessionKey}}</td>
+            <td>
+                <select ng-model="u.isAdmin">
+                    <option value="True">Admin</option>
+                    <option value="False">User</option>
+                </select>
+            </td>
+            <td><button ng-click="updateUser(u.id)">Update</button></td>
+            <td><button>Delete</button></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="8">
+                <button ng-click="pageManager.prevPage()">Prev</button>
+                <span><strong>{{pageManager.currentPage + 1}}</strong></span>
+                <button ng-click="pageManager.nextPage()">Next</button>
+                <div>
+                    <span>Pages : <strong>{{pageManager.lastPage}}</strong></span>
+                    <span>Results : {{pageManager.total}}</span>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>

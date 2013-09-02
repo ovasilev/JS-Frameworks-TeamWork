@@ -47,7 +47,7 @@ namespace News.Services.Controllers
         }
 
         [HttpGet]
-        [ActionName("posts")]
+        [ActionName("articles")]
         public IQueryable<ArticleModel> GetById(int categoryId)
         {
             var responseMsg = this.PerformOperationAndHandleExceptions(

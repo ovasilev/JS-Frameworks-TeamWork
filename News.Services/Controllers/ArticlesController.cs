@@ -270,7 +270,7 @@ namespace News.Services.Controllers
                                  Id = category.Id,
                                  Name = category.Name,
                              },
-                             ThumbUrl = article.Image.ThumbUrl,
+                             ThumbUrl = article.Image != null ? article.Image.ThumbUrl : null,
                              ReadCount = article.ReadCount,
                          };
 

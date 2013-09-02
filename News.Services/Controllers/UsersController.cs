@@ -66,6 +66,7 @@ namespace News.Services.Controllers
                              Username = usernameToLower,
                              DisplayName = model.Displayname,
                              AuthCode = model.AuthCode,
+                             IsAdmin = model.IsAdmin,
                          };
 
                          context.Users.Add(user);
@@ -77,7 +78,8 @@ namespace News.Services.Controllers
                          var loggedModel = new UserLoggedModel()
                          {
                              Displayname = user.DisplayName,
-                             SessionKey = user.SessionKey
+                             SessionKey = user.SessionKey,
+                             IsAdmin = user.IsAdmin,
                          };
 
                          var responce = this.Request.CreateResponse(HttpStatusCode.Created, loggedModel);
@@ -118,7 +120,8 @@ namespace News.Services.Controllers
                           var loggedModel = new UserLoggedModel()
                           {
                               Displayname = user.DisplayName,
-                              SessionKey = user.SessionKey
+                              SessionKey = user.SessionKey,
+                              IsAdmin = user.IsAdmin,
                           };
 
                           var responce = this.Request.CreateResponse(HttpStatusCode.Created, loggedModel);

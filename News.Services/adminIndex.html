@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html >
+<html ng-app="adminPanel" >
+<head>
+    <title></title> 
+    <script src="Scripts/libs/class.js"></script>
+    <script src="Scripts/angular/pageManager.js"></script>
+    <script src="Scripts/libs/jquery-2.0.3.js"></script>
+     <script src="Scripts/libs/angular.js"></script>
+    <script src="Scripts/angular/controllers.js"></script>
+    <script src="Scripts/angular/routing.js"></script>
+    <script src="Scripts/libs/underscore.js"></script>
+    <link href="Styles/adminStyles.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="admin-pannel">
+        <h1>Admin Pannel</h1>
+        <nav id="admin-nav-menu">
+            <ul>
+                <li><a href="#admin">AdminHome</a></li>
+                <li><a href="#admin/users">AdminUser</a></li>
+                <li><a href="#admin/articles">AdminArticle</a></li>
+
+            </ul>
+            </nav>
+        <div ng-view></div>
+    </div>
+
+   <!-- <input ng-model="q1" />
+    <select ng-model="stt">
+        <option value="1">1</option>
+        <option value="-{{q1}}" selected="selected">{{q1}}</option>
+
+    </select>
+  
+    <div id="{{q1}}" ng-repeat=" s in stuff ">{{s.v | uppercase}} </div>
+
+    <div>{{stuff}}</div>
+
+
+   
+            <select ng-model="selectedAge">
+                <option ng-repeat="p in persons" value="{{p.name}}">{{p.name}}</option>
+            </select>
+            <ul>
+                <li ng-repeat="s in st | filter:selectedAge">{{s.name}}</li>
+            </ul>
+    -->
+</body>
+</html>

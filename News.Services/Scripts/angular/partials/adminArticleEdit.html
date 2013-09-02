@@ -1,0 +1,87 @@
+﻿<table id="article-editor">
+    <tfoot>
+        <tr>
+            <td colspan="2">
+               <button ng-click="saveChanges()">Save Changes</button>
+               <button ng-click="cancelChanges()">Cancel</button>
+            </td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>{{article.id}}</td>
+        </tr>
+         <tr>
+            <td>Author</td>
+            <td>{{article.author}}</td>
+        </tr>
+         <tr>
+            <td>Publish Date</td>
+            <td>{{article.publishDate}}</td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>
+                <select ng-model="articleCategory" ng-options="cat.name for cat in articleCategories">
+                </select>
+                <input ng-model="newCategory.name"/><button ng-click="addCategory()">Add Category</button>
+            </td>
+        </tr>
+         <tr>
+            <td>Title</td>
+            <td>{{article.title}}</td>
+        </tr>
+        <tr>
+            <td>Tags</td>
+            <td>
+                <div>
+                    <span ng-repeat="tagg in article.tags">{{tagg}}
+                        <button class="smallBtn" ng-click="removeTag(tagg)">D</button>
+                    </span>
+                </div>
+                <input ng-model="newTag"/>
+                <button ng-click="addTag()">Add Tag</button>
+            </td>
+        </tr>
+         <tr>
+            <td>Content</td>
+            <td><textarea ng-model="textVal"></textarea></td>
+        </tr>
+        <tr>
+            <td>Comments</td>
+            <td>
+                <div id="comment-box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="smallcell">ID</th>
+                                <th class="largecell">Content</th>
+                                <th class="midcell">Author</th>
+                                <th class="midcell">Edit</th>
+                                <th class="midcell">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="c in article.comments">
+                                <td>{{c.id}}</td>
+                                <td>{{c.content}}</td>
+                                <td>{{c.author}}</td>
+                                <td><button ng-click="commentEditor(c.id)">Edit</button></td>
+                                <td><button ng-click="deleteComment(c.id)">Delete</button></td>
+                            </tr> 
+                        </tbody>  
+                    </table>      
+                    <div id="comment-editor" style="display:none">
+                        <p>Edit Comment By {{selectedComment.author}}</p>
+                        <textarea ng-model="editedCommentContent"></textarea>
+                        <div>
+                            <button ng-click="acceptCommentEditor()">Accept</button>
+                            <button ng-click="cancelCommentEditor()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

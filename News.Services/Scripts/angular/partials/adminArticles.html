@@ -1,0 +1,74 @@
+﻿<h2>Article Page</h2>
+    <fieldset id="search-field">
+        <legend>Article Search</legend>
+        <ul>
+            <li>
+                <input ng-model="query" placeholder="Search"/>
+            </li>
+            <li>Category : 
+                <select ng-model="categoryFilter">
+                    <option ng-repeat="cat in categoryFilterData" value="{{cat.name}}">{{cat.name}}</option>
+                </select>
+            </li>
+            <li>
+                Order By :
+                <select ng-model="orderByFilter">
+                    <option ng-repeat="p in orderByData" value="{{p.prop}}">{{p.display}}</option>
+                </select>
+            </li>
+             <li>
+                 Sort Order :
+                 <select ng-model="orderByOption">
+                    <option value="asc">Ascendence</option>
+                    <option value="desc">Descendence</option>
+                </select>
+             </li>
+            <li>
+                 Items Per Page :
+                 <select ng-model="pageSize">
+                    <option ng-repeat="size in pageSizes" value="{{size}}">{{size}}</option>
+                </select>
+            </li>
+        </ul>
+        <button id="search-btn" ng-click="filterArticles()">Search</button>
+    </fieldset>
+<hr />
+    <table>
+        <thead>
+            <tr>
+                <th class="smallcell">ID</th>
+                <th class="largecell" >Title</th>
+                <th class="midcell"  >PublishDate</th>
+                <th class="midcell"  >Author</th>
+                <th class="smallcell">Comments</th>
+                <th class="midcell"  >Category</th>
+                <th class="midcell"  >Edit</th>
+                <th class="midcell"  >Delete</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="8">
+                    <button ng-click="pageManager.prevPage()">Prev</button>
+                    <span><strong>{{pageManager.currentPage + 1}}</strong></span>
+                    <button ng-click="pageManager.nextPage()">Next</button>
+                    <div>
+                        <span>Pages : <strong>{{pageManager.lastPage}}</strong></span>
+                        <span>Results : {{pageManager.total}}</span>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+        <tbody >
+            <tr ng-repeat="article in pageManager.pageData" id="a{{article.id}}">
+                <td>{{article.id}}</td>
+                <td>{{article.title}}</td>
+                <td>{{article.datePublished}}</td>
+                <td>{{article.author}}</td>
+                <td>{{article.comments.length || '-'}}</td>
+                <td>{{article.category.name}}</td>
+                <td><a href="#/admin/articles/{{article.id}}">Edit</a></td>
+                <td><button ng-click="deleteArticle(article.id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>

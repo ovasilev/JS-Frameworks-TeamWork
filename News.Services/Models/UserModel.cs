@@ -15,5 +15,8 @@ namespace News.Services.Models
 
         [DataMember(Name = "authCode")]
         public string AuthCode { get; set; }
+
+        [DataMember(Name = "isAdmin")]
+        public bool IsAdmin { get; set; }
     }
 }
