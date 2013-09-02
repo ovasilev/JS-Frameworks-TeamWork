@@ -13,7 +13,7 @@ namespace News.Services.Controllers
     public class BaseApiController : ApiController
     {
         private const int SessionKeyLenght = 50;
-
+         
         protected readonly IDbContextFactory<DbContext> contextFactory;
 
         public BaseApiController()
